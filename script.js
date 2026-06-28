@@ -49,6 +49,7 @@ function main() {
 
                         <video
                             class="work-video"
+                            controlsList="nodownload"
                             muted
                             loop
                             playsinline
@@ -73,70 +74,86 @@ function main() {
 
                     const video = card.querySelector(".work-video");
                     const muteIcon = card.querySelector(".mute-icon");
+                    video.addEventListener("dblclick", () => {
 
+                        if (document.fullscreenElement) {
+
+                            document.exitFullscreen();
+
+                        } else {
+
+                            video.requestFullscreen().catch(err => {
+
+                                console.log(err);
+
+                            });
+
+                        }
+
+                    });
                     // ------------------------
                     // Mute / Unmute
                     // ------------------------
-muteIcon.addEventListener("click", () => {
+                    muteIcon.addEventListener("click", () => {
 
-    const allVideos = document.querySelectorAll(".work-video");
-    const allIcons = document.querySelectorAll(".mute-icon");
+                        const allVideos = document.querySelectorAll(".work-video");
+                        const allIcons = document.querySelectorAll(".mute-icon");
 
-    if (video.muted) {
+                        if (video.muted) {
 
-        // Pause and mute every other video
-        allVideos.forEach(v => {
+                            // Pause and mute every other video
+                            allVideos.forEach(v => {
 
-            if (v !== video) {
+                                if (v !== video) {
 
-                v.pause();
-                v.muted = true;
+                                    v.pause();
+                                    v.muted = true;
 
-            }
+                                }
 
-        });
+                            });
 
-        allIcons.forEach(icon => {
+                            allIcons.forEach(icon => {
 
-            if (icon !== muteIcon) {
+                                if (icon !== muteIcon) {
 
-                icon.src = "./elements/silent.png";
+                                    icon.src = "./elements/silent.png";
 
-            }
+                                }
 
-        });
+                            });
 
-        video.muted = false;
-        muteIcon.src = "./elements/volume.png";
+                            video.muted = false;
+                            muteIcon.src = "./elements/volume.png";
 
-        video.play().catch(() => {});
+                            video.play().catch(() => { });
 
-    }
+                        }
 
-    else {
+                        else {
 
-        // Mute this video
-        video.muted = true;
-        muteIcon.src = "./elements/silent.png";
+                            // Mute this video
+                            video.muted = true;
+                            muteIcon.src = "./elements/silent.png";
 
-        // Resume every visible video
-        allVideos.forEach(v => {
+                            // Resume every visible video
+                            allVideos.forEach(v => {
 
-            const rect = v.getBoundingClientRect();
+                                const rect = v.getBoundingClientRect();
 
-            const visible =
-                rect.left < window.innerWidth &&
-                rect.right > 0;
+                                const visible =
+                                    rect.left < window.innerWidth &&
+                                    rect.right > 0;
 
-            if (visible) {
-                v.play().catch(() => {});
-            }
+                                if (visible) {
+                                    v.play().catch(() => { });
+                                }
 
-        });
+                            });
 
-    }
+                        }
 
-});
+                    });
 
                 });
 
@@ -174,7 +191,7 @@ muteIcon.addEventListener("click", () => {
 
                 if (entry.isIntersecting) {
 
-                    video.play().catch(() => {});
+                    video.play().catch(() => { });
 
                 }
 
@@ -222,7 +239,7 @@ muteIcon.addEventListener("click", () => {
 
                 if (visible) {
 
-                    video.play().catch(() => {});
+                    video.play().catch(() => { });
 
                 }
 
@@ -233,7 +250,6 @@ muteIcon.addEventListener("click", () => {
     });
 
     loadWorks();
-
 }
 
 main();
