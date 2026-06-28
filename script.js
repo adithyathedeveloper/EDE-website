@@ -77,36 +77,66 @@ function main() {
                     // ------------------------
                     // Mute / Unmute
                     // ------------------------
+muteIcon.addEventListener("click", () => {
 
-                    muteIcon.addEventListener("click", () => {
+    const allVideos = document.querySelectorAll(".work-video");
+    const allIcons = document.querySelectorAll(".mute-icon");
 
-                        const allVideos = document.querySelectorAll(".work-video");
-                        const allIcons = document.querySelectorAll(".mute-icon");
+    if (video.muted) {
 
-                        // If this video is muted -> unmute only this one
-                        if (video.muted) {
+        // Pause and mute every other video
+        allVideos.forEach(v => {
 
-                            allVideos.forEach(v => {
-                                v.muted = true;
-                            });
+            if (v !== video) {
 
-                            allIcons.forEach(icon => {
-                                icon.src = "./elements/silent.png";
-                            });
+                v.pause();
+                v.muted = true;
 
-                            video.muted = false;
-                            muteIcon.src = "./elements/volume.png";
+            }
 
-                        }
+        });
 
-                        else {
+        allIcons.forEach(icon => {
 
-                            video.muted = true;
-                            muteIcon.src = "./elements/silent.png";
+            if (icon !== muteIcon) {
 
-                        }
+                icon.src = "./elements/silent.png";
 
-                    });
+            }
+
+        });
+
+        video.muted = false;
+        muteIcon.src = "./elements/volume.png";
+
+        video.play().catch(() => {});
+
+    }
+
+    else {
+
+        // Mute this video
+        video.muted = true;
+        muteIcon.src = "./elements/silent.png";
+
+        // Resume every visible video
+        allVideos.forEach(v => {
+
+            const rect = v.getBoundingClientRect();
+
+            const visible =
+                rect.left < window.innerWidth &&
+                rect.right > 0;
+
+            if (visible) {
+                v.play().catch(() => {});
+            }
+
+        });
+
+    }
+
+});
 
                 });
 
