@@ -1,6 +1,44 @@
 /* ===== GOOGLE FONT ===== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* =========================
+   EDE THEME VARIABLES
+========================= */
+
+:root {
+    /* Existing / Light Theme */
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --secondary-text: #5f6677;
+    --card-bg: #f5f5f5;
+    --border-color: rgba(9, 21, 54, .15);
+    --nav-bg: #ffffff;
+    --price-color: #0049ff;
+
+    /* EDE Brand */
+    --brand-blue: #091536;
+    --brand-blue-light: #0077ff;
+}
+
+
+/* =========================
+   DARK THEME
+========================= */
+
+body.dark-mode {
+    --bg-color: #091536;
+    --text-color: #f5f5f5;
+    --secondary-text: #b0b0b0;
+    --card-bg: #151518;
+    --nav-bg: #091536;
+    --border-color: #b0b0b0;
+    --price-color: #00b7ff;
+
+    /* Keep EDE branding */
+    --brand-blue: #ff2d95;
+    --brand-blue-light: #00b7ff;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +50,102 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
+/* body {
     background: #f8f9fb;
     color: #091536;
+    
+} */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.sun-icon {
+    display: none;
+    cursor: pointer;
+}
+.moon-icon {
+    cursor: pointer;
 }
 
+body.dark-mode .moon-icon {
+    display: none;
+}
+
+body.dark-mode .sun-icon {
+    display: block;
+
+    
+}
+.logo {
+    height: 180px;
+    width: auto;
+    cursor: pointer;
+}
+.logo-dark {
+    display: none;
+    
+
+}
+
+body.dark-mode .logo-light {
+    display: none;
+}
+
+body.dark-mode .logo-dark {
+    display: block;
+    height:97px;
+    
+}
+body.dark-mode .prev img,
+body.dark-mode .next img {
+    filter: invert(1);
+}
+/* ========================
+   SCROLLBAR
+   ======================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #091536;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #091536;
+}
+
+
+/* ========================
+   DARK MODE SCROLLBAR
+   ======================== */
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #ff2d95;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: #ff2d95;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(9, 21, 54, 0.85);
+    border-radius: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: rgba(255, 45, 149, 0.85);
+}
 /* ==========================
    NAVBAR
 ========================== */
@@ -33,7 +161,7 @@ body {
 
     padding: 0 6vw;
 
-    background: rgba(255, 255, 255, 0.92);
+    background: var(--bg-color);
 
     backdrop-filter: blur(15px);
 
@@ -44,17 +172,13 @@ body {
     z-index: 1000;
 
     border-bottom: 1px solid rgba(9, 21, 54, .08);
-    background-color: #F4F6F8;
+    background-color: var(--nav-bg);
 
 }
 
 /* Logo */
 
-.logo {
-    height: 180px;
-    width: auto;
-    cursor: pointer;
-}
+
 
 /* Navigation Links */
 
@@ -67,7 +191,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: #091536;
+    color: var(--brand-blue);
 
     font-size: 0.95rem;
     font-weight: 600;
@@ -95,7 +219,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: #0077ff;
+    color:var(--brand-blue-light);
 }
 
 .nav-links a:hover::after {
@@ -103,7 +227,11 @@ body {
 }
 
 /* CTA */
-
+.contact{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+}
 .contact a {
     text-decoration: none;
 
@@ -186,7 +314,7 @@ body {
 
     letter-spacing: -4px;
 
-    color: #091536;
+    color: var(--brand-blue);
 }
 
 .hero h1 span {
@@ -207,7 +335,7 @@ body {
 
     font-size: 1.2rem;
 
-    color: #5f6677;
+    color: var(--secondary-text);
 
     max-width: 700px;
 }
@@ -242,10 +370,10 @@ body {
 /* Secondary */
 
 .secondary-btn {
-    color: #091536;
+    color: var(--brand-blue);
     /* cursor: pointer; */
-    border: 1px solid rgba(9, 21, 54, .15);
-    background: white;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
 }
 
 /* ==========================
@@ -260,6 +388,9 @@ body {
 @media (max-width: 800px) {
     .logo {
         height: 160px;
+    }
+    body.dark-mode .logo-dark {
+        height: 80px;
     }
 
     .nav {
@@ -300,6 +431,9 @@ body {
 
     .logo {
         height: 140px;
+    }
+    body.dark-mode .logo-dark{
+        height: 60px;
     }
 
     /* Hide desktop nav */
@@ -352,6 +486,9 @@ body {
     .logo {
         height: 100px;
     }
+    body.dark-mode .logo-dark{
+        height: 40px;
+    }
 
     .hero h1 {
         font-size: clamp(1rem, 10vw, 6rem);
@@ -400,7 +537,7 @@ body {
     top: 75px;
     right: 20px;
 
-    background-color: #F4F6F8;
+    background-color: var(--bg-color);
 
     padding: 10px 20px;
 
@@ -430,7 +567,7 @@ body {
 
 .newnav a {
     text-decoration: none;
-    color: #091536;
+    color: var(--brand-blue);
     font-size: 0.95rem;
     font-weight: 600;
     padding: 10px 0;
@@ -438,10 +575,12 @@ body {
 
 @media (max-width: 600px) {
     .ham {
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         position: absolute;
         top: 20px;
-        right: 20px;
+        right: 60px;
         width: 30px;
         height: 30px;
         cursor: pointer;
@@ -582,7 +721,7 @@ body {
 
     font-weight: 800;
 
-    color: #091536;
+    color: var(--brand-blue);
 
     margin-bottom: 1rem;
 
@@ -593,7 +732,7 @@ body {
 
     font-weight: 800;
 
-    color: #091536;
+    color: var(--brand-blue);
 
     margin-bottom: 1rem;
 
@@ -609,7 +748,7 @@ body {
 
     line-height: 1.8;
 
-    color: #5f6677;
+    color: var(--secondary-text);
 }
 
 .section-heading p {
@@ -621,7 +760,7 @@ body {
 
     line-height: 1.8;
 
-    color: #5f6677;
+    color: var(--secondary-text);
 }
 
 /* Grid */
@@ -637,13 +776,13 @@ body {
 /* Card */
 
 .service-card {
-    background: white;
+    background: var(--bg-color);
 
     padding: 2rem;
 
     border-radius: 24px;
 
-    border: 1px solid rgba(9, 21, 54, .08);
+    border: 1px solid var(--border-color);
 
     transition: all .35s ease;
 
@@ -685,7 +824,7 @@ body {
 .service-card h3 {
     font-size: 1.35rem;
 
-    color: #091536;
+    color: var(--brand-blue);
 
     margin-bottom: .75rem;
 
@@ -695,7 +834,7 @@ body {
 /* Type */
 
 .service-type {
-    color: #5f6677;
+    color: var(--secondary-text);
 
     margin-bottom: 1.5rem;
 
@@ -711,7 +850,7 @@ body {
 
     font-weight: 800;
 
-    color: #0049ff;
+    color: var(--price-color);
 }
 
 /* Negotiable */
@@ -761,12 +900,9 @@ body {
 /* Featured Cards */
 
 .featured {
-    background:
-        linear-gradient(180deg,
-            rgba(0, 183, 255, .04),
-            rgba(255, 255, 255, 1));
-
-    border: 2px solid rgba(0, 183, 255, .15);
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 12px 35px rgba(0, 183, 255, 0.08);
 }
 
 /* Featured Badge */
@@ -864,30 +1000,28 @@ body {
 .works-grid {
     display: flex;
     gap: 30px;
-    width: max-content;
+    width: 100%;
     align-items: flex-start;
-    animation: marquee 20s linear infinite;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .works-container {
     width: 100%;
-    overflow: hidden;
-    padding: 20px 0;
-    height: 100%;
+    padding: 20px 5%;
 }
 
 .cardofworks {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     width: 280px;
-    flex-shrink: 0;
 }
 
 .cardofworks h3{
     font-size:1.15rem;
     font-weight:700;
-    color:#091536;
+    color: var(--brand-blue);
     margin:0;
     align-self:flex-start;
 }
@@ -895,7 +1029,7 @@ body {
 .cardofworks p{
     font-size:.92rem;
     line-height:1.7;
-    color:#5f6677;
+    color: var(--secondary-text);
     margin:0;
 }
 
@@ -949,8 +1083,8 @@ body {
     height:100vh;
 } */
  body {
-    background: #f8f9fb;
-    color: #091536;
+   background: var(--bg-color);
+    color: var(--text-color);
     overflow-x: hidden;
 
     /* Add these three */
@@ -962,14 +1096,7 @@ body {
 .works {
     flex: 1;
 }
-@keyframes marquee {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
 
-.works-container:hover .works-grid {
-    animation-play-state: paused;
-}
 .cardofworks:hover .mute-icon{ 
     cursor: pointer;
     visibility: visible;
@@ -994,7 +1121,7 @@ body {
 .testimonials h3{
     font-size:2.3rem;
     font-weight:800;
-    color:#091536;
+    color: var(--brand-blue);
     text-align:center;
     margin-bottom:10px;
 
@@ -1004,7 +1131,7 @@ body {
 .testimonials > h4{
     font-size:1rem;
     font-weight:500;
-    color:#5f6677;
+    color: var(--secondary-text);
     text-align:center;
     margin-bottom:50px;
 
@@ -1023,7 +1150,7 @@ body {
 .testimonial-card{
     max-width:750px;
     padding:40px;
-    background:#ffffff;
+    background: var(--bg-color);
     border-radius:24px;
     box-shadow:
 
@@ -1058,7 +1185,7 @@ body {
 .testimonial-card p{
     font-size:1rem;
     line-height:1.9;
-    color:#4d5566;
+    color: var(--secondary-text);
     font-style:italic;
     margin-bottom:30px;
 
@@ -1070,7 +1197,7 @@ body {
 .testimonial-card h4{
     font-size:1.1rem;
     font-weight:700;
-    color:#091536;
+    color: var(--brand-blue);
     margin:0;
 }
 
@@ -1226,7 +1353,7 @@ body {
 
     font-weight:800;
 
-    color:#091536;
+    color: var(--brand-blue);
 
     margin-bottom:10px;
 
@@ -1279,7 +1406,7 @@ body {
 
     line-height:1.9;
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
     margin-bottom:18px;
 
@@ -1296,8 +1423,7 @@ body {
     text-align:center;
 
     font-size:2.2rem;
-
-    color:#091536;
+color: var(--brand-blue);
 
     margin-bottom:50px;
 
@@ -1322,7 +1448,7 @@ body {
 
 .service-item{
 
-    background:white;
+    background: var(--bg-color);
 
     padding:30px;
 
@@ -1354,7 +1480,7 @@ body {
 
 .service-item h3{
 
-    color:#091536;
+    color: var(--brand-blue);
 
     font-size:1.15rem;
 
@@ -1365,7 +1491,7 @@ body {
 
 .service-item p{
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
     line-height:1.7;
 
@@ -1396,7 +1522,7 @@ body {
 
 .step{
 
-    background:#F8FAFC;
+    background: var(--bg-color);
 
     padding:30px;
 
@@ -1409,7 +1535,7 @@ body {
 
 .step h3{
 
-    color:#091536;
+    color: var(--brand-blue);
 
     margin-bottom:12px;
 
@@ -1418,7 +1544,7 @@ body {
 
 .step p{
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
     line-height:1.7;
 
@@ -1539,7 +1665,7 @@ body {
 .cta-section p{
 
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
 
     margin-bottom:35px;
@@ -1782,7 +1908,7 @@ body {
 
     font-weight:800;
 
-    color:#091536;
+    color: var(--brand-blue);
 
     line-height:1.2;
 
@@ -1797,7 +1923,7 @@ body {
 
     margin:auto;
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
     line-height:1.8;
 
@@ -1811,9 +1937,11 @@ body {
 
 .contact-grid{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:1fr 1fr;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
     gap:40px;
 
@@ -1824,9 +1952,13 @@ body {
 /* Left Card */
 
 .contact-card{
+background: var(--bg-color);
+width:70%;
+display:flex;
 
-    background:#ffffff;
-
+    flex-direction:column;
+    justify-content:center;
+    /* align-items:center; */
     padding:40px;
 
     border-radius:28px;
@@ -1834,12 +1966,30 @@ body {
     box-shadow:
     0 12px 35px rgba(9,21,54,.06);
 
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(95,206,255,.10),
+
+        rgba(255,72,147,.08)
+
+    );
+
+
+    border:
+
+    1px solid rgba(95,206,255,.12)
+
 }
 
 
 .contact-card h2{
 
-    color:#091536;
+    color: var(--brand-blue);
 
     margin-bottom:20px;
 
@@ -1848,7 +1998,7 @@ body {
 
 .contact-desc{
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
     line-height:1.8;
 
@@ -1867,7 +2017,7 @@ body {
 
 .contact-item h3{
 
-    color:#091536;
+    color: var(--brand-blue);
 
     margin-bottom:15px;
 
@@ -1939,7 +2089,7 @@ body {
 
 .social-links span{
 
-    color:#091536;
+    color: #00B7FF;
 
     font-weight:600;
 
@@ -1983,7 +2133,7 @@ body {
 .contact-message h2{
 
 
-    color:#091536;
+    color: var(--brand-blue);
 
 
     margin-bottom:25px;
@@ -2009,7 +2159,7 @@ body {
 .contact-message li{
 
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
 
     line-height:2;
@@ -2022,7 +2172,7 @@ body {
 .contact-message p{
 
 
-    color:#5f6677;
+    color: var(--secondary-text);
 
 
     line-height:1.8;
@@ -2193,4 +2343,50 @@ body {
 }
 .works-grid.paused{
     animation-play-state: paused;
+}
+.works-prev{
+    background:transparent;
+}
+.works-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.works-grid-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.works-grid {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+
+    transition: transform 0.4s ease;
+}
+
+.cardofworks {
+    flex-shrink: 0;
+}
+.prev,
+.next {
+    flex-shrink: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    transition: opacity 0.2s ease;
+}
+
+.prev img,
+.next img {
+    width: 100%;
+    height: 100%;
 }

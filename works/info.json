@@ -1,28 +1,37 @@
 [
-{
-        "title":"Biriyani Ad",
-        "file":"./works/biriyani.mp4"
-    },   
     {
-        "title":"Saree AD",
-        "file":"./works/saree.mp4"
+        "title": "Restaurants",
+        "file": "./works/biriyani.mp4",
+        "thumbnail": "./works/thumbs/biriyanithumb.png"
     },
     {
-        "title":"Jewellery Ad",
-        "file":"./works/ring.mp4"
+        "title": "Cosmetics",
+        "file": "./works/Perfume.mp4",
+        "thumbnail": "./works/thumbs/perfumethumb.png"
     },
     {
-        "title":"Water bottle Ad",
-        "file":"./works/water.mp4"
+        "title": "Skin Care",
+        "file": "./works/skincare.mp4",
+        "thumbnail": "./works/thumbs/moisturizerthumb.png"
     },
     {
-        "title":"Cafe Ad",
-        "file":"./works/cafe.mp4"
+        "title": "Jewelleries",
+        "file": "./works/ring.mp4",
+        "thumbnail": "./works/thumbs/ringthumb.png"
     },
     {
-        "title":"Fashion transformational Ad",
-        "file":"./works/fashion.mp4"
+        "title": "Clothing Boutiques",
+        "file": "./works/saree.mp4",
+        "thumbnail": "./works/thumbs/sareethumb.png"
+    },
+    {
+        "title": "Lifestyle Products",
+        "file": "./works/water.mp4",
+        "thumbnail": "./works/thumbs/waterbottlethumb.png"
+    },
+    {
+        "title": "Cafes",
+        "file": "./works/cafe.mp4",
+        "thumbnail": "./works/thumbs/cafeadthumb.png"
     }
-    
-
 ]

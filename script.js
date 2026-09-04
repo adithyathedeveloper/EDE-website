@@ -12,6 +12,39 @@ function main() {
             newNav.classList.toggle("active");
         });
     }
+    // ------------------------
+// Dark Mode
+// ------------------------
+const themeToggles = document.querySelectorAll(".theme-toggle");
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+} else {
+    document.body.classList.remove("dark-mode");
+}
+
+// Add click event to BOTH theme toggles
+themeToggles.forEach(toggle => {
+
+    toggle.addEventListener("click", (event) => {
+
+        // Prevent hamburger menu from opening
+        event.stopPropagation();
+
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
+
+    });
+
+});
 
     // ------------------------
     // Footer Year
@@ -38,201 +71,240 @@ function main() {
 
             if (!grid) return;
 
+
             function buildCards(list) {
 
-                list.forEach(work => {
+    list.forEach(work => {
 
-                    const card = document.createElement("div");
-                    card.classList.add("cardofworks");
+        const card = document.createElement("div");
 
-                    card.innerHTML = `
+        card.classList.add("cardofworks");
 
-                        <video
-                            class="work-video"
-                            controlsList="nodownload"
-                            muted
-                            loop
-                            playsinline
-                            preload="metadata">
+        card.innerHTML = `
 
-                            <source
-                                src="${work.file}"
-                                type="video/mp4">
+            <video
+                class="work-video"
+                controlsList="nodownload"
+                muted
+                playsinline
+                preload="metadata"
+                poster="${work.thumbnail || ''}">
 
-                        </video>
+                <source
+                    src="${work.file}"
+                    type="video/mp4">
 
-                        <img
-                            src="./elements/silent.png"
-                            alt="Mute / Unmute"
-                            class="mute-icon">
+            </video>
 
-                        <h3>${work.title}</h3>
+            <img
+                src="./elements/silent.png"
+                alt="Mute / Unmute"
+                class="mute-icon">
 
-                    `;
+            <h3>${work.title}</h3>
 
-                    grid.appendChild(card);
+        `;
 
-                    const video = card.querySelector(".work-video");
-                    const muteIcon = card.querySelector(".mute-icon");
+        grid.appendChild(card);
 
-                    // Anchor so we can put the video back exactly where it came from
-                    const placeholder = document.createComment("video-anchor");
+        const video = card.querySelector(".work-video");
+        const muteIcon = card.querySelector(".mute-icon");
 
-                    // ------------------------
-                    // Double click: expand / collapse
-                    // ------------------------
-                    video.addEventListener("dblclick", () => {
 
-                        const isExpanding = !video.classList.contains("expanded");
+        // ------------------------
+        // CLICK VIDEO → PLAY / PAUSE
+        // ------------------------
 
-                        video.classList.toggle("expanded");
+        video.addEventListener("click", () => {
 
-                        if (isExpanding) {
+            if (video.paused) {
 
-                            // Stop the marquee while a video is taking over the screen
-                            grid.classList.add("paused");
+                video.play().catch(() => {});
 
-                            // The marquee track is `transform`-animated, which makes it
-                            // the containing block for any `position: fixed` descendant.
-                            // Move the video to <body> so "fixed" is truly viewport-wide.
-                            video.before(placeholder);
-                            document.body.appendChild(video);
+            } else {
 
-                            // Only the double-clicked video should keep playing
-                            const allVideos = document.querySelectorAll(".work-video");
-                            const allIcons = document.querySelectorAll(".mute-icon");
-
-                            allVideos.forEach(v => {
-                                if (v !== video) {
-                                    v.pause();
-                                }
-                            });
-
-                            // Unmute the expanded video and reflect that on its icon,
-                            // muting/resetting every other icon to match
-                            allIcons.forEach(icon => {
-                                if (icon !== muteIcon) {
-                                    icon.src = "./elements/silent.png";
-                                }
-                            });
-
-                            video.muted = false;
-                            muteIcon.src = "./elements/volume.png";
-
-                            video.play().catch(() => { });
-
-                        }
-
-                        else {
-
-                            // Resume the marquee
-                            grid.classList.remove("paused");
-
-                            // Put the video back exactly where it was in its card
-                            placeholder.replaceWith(video);
-
-                            // Mute the video again as it returns to the strip
-                            video.muted = true;
-                            muteIcon.src = "./elements/silent.png";
-
-                            // Resume only the videos currently visible in the marquee
-                            const allVideos = document.querySelectorAll(".work-video");
-
-                            allVideos.forEach(v => {
-
-                                const rect = v.getBoundingClientRect();
-
-                                const visible =
-                                    rect.left < window.innerWidth &&
-                                    rect.right > 0;
-
-                                if (visible) {
-                                    v.play().catch(() => { });
-                                }
-                                else {
-                                    v.pause();
-                                }
-
-                            });
-
-                        }
-
-                    });
-
-                    // ------------------------
-                    // Mute / Unmute
-                    // ------------------------
-                    muteIcon.addEventListener("click", () => {
-
-                        const allVideos = document.querySelectorAll(".work-video");
-                        const allIcons = document.querySelectorAll(".mute-icon");
-
-                        if (video.muted) {
-
-                            // Pause and mute every other video
-                            allVideos.forEach(v => {
-
-                                if (v !== video) {
-
-                                    v.pause();
-                                    v.muted = true;
-
-                                }
-
-                            });
-
-                            allIcons.forEach(icon => {
-
-                                if (icon !== muteIcon) {
-
-                                    icon.src = "./elements/silent.png";
-
-                                }
-
-                            });
-
-                            video.muted = false;
-                            muteIcon.src = "./elements/volume.png";
-
-                            video.play().catch(() => { });
-
-                        }
-
-                        else {
-
-                            // Mute this video
-                            video.muted = true;
-                            muteIcon.src = "./elements/silent.png";
-
-                            // Resume every visible video
-                            allVideos.forEach(v => {
-
-                                const rect = v.getBoundingClientRect();
-
-                                const visible =
-                                    rect.left < window.innerWidth &&
-                                    rect.right > 0;
-
-                                if (visible) {
-                                    v.play().catch(() => { });
-                                }
-
-                            });
-
-                        }
-
-                    });
-
-                });
+                video.pause();
 
             }
 
-            // Duplicate cards for infinite marquee
-            buildCards(works);
-            buildCards(works);
+        });
 
-            observeVideos();
 
+        // ------------------------
+        // MUTE / UNMUTE
+        // ------------------------
+
+        muteIcon.addEventListener("click", (event) => {
+
+            // Don't let the click affect the video
+            event.stopPropagation();
+
+            const allVideos = document.querySelectorAll(".work-video");
+            const allIcons = document.querySelectorAll(".mute-icon");
+
+
+            // ------------------------
+            // CURRENTLY MUTED
+            // → UNMUTE
+            // ------------------------
+
+            if (video.muted) {
+
+                // Mute every other video
+                allVideos.forEach(otherVideo => {
+
+                    if (otherVideo !== video) {
+
+                        otherVideo.muted = true;
+
+                    }
+
+                });
+
+
+                // Change every other icon to silent
+                allIcons.forEach(otherIcon => {
+
+                    if (otherIcon !== muteIcon) {
+
+                        otherIcon.src = "./elements/silent.png";
+
+                    }
+
+                });
+
+
+                // Unmute this video
+                video.muted = false;
+
+                // Change this icon
+                muteIcon.src = "./elements/volume.png";
+
+
+                // Make sure video continues playing
+                if (video.paused) {
+
+                    video.play().catch(() => {});
+
+                }
+
+            }
+
+
+            // ------------------------
+            // CURRENTLY UNMUTED
+            // → MUTE
+            // ------------------------
+
+            else {
+
+                video.muted = true;
+
+                muteIcon.src = "./elements/silent.png";
+
+            }
+
+        });
+
+    });
+
+}
+
+
+
+            // Build the portfolio cards ONCE
+            buildCards(works);
+            const prevButton = document.querySelector(".prev");
+            const nextButton = document.querySelector(".next");
+
+            let currentPosition = 0;
+
+            function getCardStep() {
+
+                const card = document.querySelector(".cardofworks");
+
+                if (!card) return 0;
+
+                const gridStyle = window.getComputedStyle(grid);
+
+                const gap = parseFloat(gridStyle.columnGap) || 0;
+
+                return card.offsetWidth + gap;
+
+            }
+
+
+            function updateButtons() {
+
+                if (currentPosition === 0) {
+
+                    prevButton.style.opacity = "0.4";
+                    prevButton.style.pointerEvents = "none";
+
+                } else {
+
+                    prevButton.style.opacity = "1";
+                    prevButton.style.pointerEvents = "auto";
+
+                }
+
+
+                if (currentPosition >= works.length - 1) {
+
+                    nextButton.style.opacity = "0.4";
+                    nextButton.style.pointerEvents = "none";
+
+                } else {
+
+                    nextButton.style.opacity = "1";
+                    nextButton.style.pointerEvents = "auto";
+
+                }
+
+            }
+
+
+            nextButton.addEventListener("click", () => {
+
+                if (currentPosition < works.length - 1) {
+
+                    currentPosition++;
+
+                    grid.style.transform =
+                        `translateX(-${currentPosition * getCardStep()}px)`;
+
+                }
+
+                updateButtons();
+
+            });
+
+
+            prevButton.addEventListener("click", () => {
+
+                if (currentPosition > 0) {
+
+                    currentPosition--;
+
+                    grid.style.transform =
+                        `translateX(-${currentPosition * getCardStep()}px)`;
+
+                }
+
+                updateButtons();
+
+            });
+
+
+            window.addEventListener("resize", () => {
+
+                grid.style.transform =
+                    `translateX(-${currentPosition * getCardStep()}px)`;
+
+            });
+
+
+            updateButtons();
         }
 
         catch (err) {
@@ -243,87 +315,6 @@ function main() {
 
     }
 
-    // ------------------------
-    // Play only visible videos
-    // ------------------------
-
-    function observeVideos() {
-
-        const videos = document.querySelectorAll(".work-video");
-
-        const observer = new IntersectionObserver((entries) => {
-
-            entries.forEach(entry => {
-
-                const video = entry.target;
-
-                // Don't let the observer fight with an expanded video
-                if (video.classList.contains("expanded")) return;
-
-                if (entry.isIntersecting) {
-
-                    video.play().catch(() => { });
-
-                }
-
-                else {
-
-                    video.pause();
-
-                }
-
-            });
-
-        }, {
-
-            threshold: 0.6
-
-        });
-
-        videos.forEach(video => observer.observe(video));
-
-    }
-
-    // ------------------------
-    // Pause when tab inactive
-    // ------------------------
-
-    document.addEventListener("visibilitychange", () => {
-
-        const videos = document.querySelectorAll(".work-video");
-
-        if (document.hidden) {
-
-            videos.forEach(video => video.pause());
-
-        }
-
-        else {
-
-            videos.forEach(video => {
-
-                if (video.classList.contains("expanded")) {
-                    video.play().catch(() => { });
-                    return;
-                }
-
-                const rect = video.getBoundingClientRect();
-
-                const visible =
-                    rect.left < window.innerWidth &&
-                    rect.right > 0;
-
-                if (visible) {
-
-                    video.play().catch(() => { });
-
-                }
-
-            });
-
-        }
-
-    });
 
     loadWorks();
 }
