@@ -696,7 +696,7 @@ body.dark-mode::-webkit-scrollbar-thumb {
 @media (max-width: 600px) {
 
     .footer {
-        flex-direction: column;
+        /* flex-direction: column; */
         gap: 1rem;
 
         padding: 1.5rem;
@@ -2405,4 +2405,962 @@ display:flex;
 .next img {
     width: 100%;
     height: 100%;
+}
+/* ========================================
+   WORKS PAGE
+======================================== */
+
+
+/* Main container */
+
+.works-page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 150px 8vw 80px;
+
+    background: var(--bg-color);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* ========================================
+   WORKS HERO
+======================================== */
+
+.works-hero {
+    max-width: 850px;
+
+    margin: 0 auto 65px;
+
+    text-align: center;
+}
+
+.works-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 22px;
+
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: var(--brand-blue-light);
+}
+
+
+.works-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+
+    font-weight: 800;
+    line-height: 1.1;
+
+    letter-spacing: -2px;
+
+    color: var(--brand-blue);
+}
+
+
+.works-hero h1 span {
+    background: linear-gradient(
+        135deg,
+        #ff7a18,
+        #ff2d95,
+        #00b7ff
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.works-hero p {
+    max-width: 650px;
+
+    margin: 24px auto 0;
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+
+    color: var(--secondary-text);
+}
+
+
+/* ========================================
+   SECTOR GRID
+======================================== */
+
+.works-sectors {
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+
+/* ========================================
+   SECTOR CARD
+======================================== */
+
+.sector-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 320px;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    color: var(--text-color);
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        background-color 0.3s ease;
+}
+
+
+/* Decorative background glow */
+
+.sector-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -100px;
+    bottom: -120px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(0, 183, 255, 0.12),
+        transparent 70%
+    );
+
+    pointer-events: none;
+
+    transition:
+        transform 0.45s ease,
+        opacity 0.35s ease;
+}
+
+
+/* Card number */
+
+.sector-number {
+    position: relative;
+    z-index: 1;
+
+    font-size: 0.85rem;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: var(--brand-blue-light);
+}
+
+
+/* Card content */
+
+.sector-content {
+    position: relative;
+    z-index: 1;
+
+    max-width: 440px;
+
+    margin-top: 40px;
+}
+
+
+/* Category label */
+
+.sector-label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+
+    color: var(--secondary-text);
+}
+
+
+/* Card heading */
+
+.sector-content h2 {
+    margin-bottom: 14px;
+
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+
+    font-weight: 800;
+    line-height: 1.2;
+
+    letter-spacing: -0.7px;
+
+    color: var(--brand-blue);
+}
+
+
+/* Card description */
+
+.sector-content p {
+    max-width: 400px;
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+
+    color: var(--secondary-text);
+}
+
+
+/* Explore link */
+
+.sector-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 24px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    color: var(--brand-blue-light);
+
+    transition: gap 0.3s ease;
+}
+
+
+.sector-link span {
+    font-size: 1.1rem;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* Top-right arrow */
+
+.sector-arrow {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+
+    font-size: 1.2rem;
+
+    color: var(--brand-blue);
+
+    background: var(--bg-color);
+
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* ========================================
+   HOVER EFFECTS
+======================================== */
+
+.sector-card:hover {
+    transform: translateY(-7px);
+
+    border-color: var(--brand-blue-light);
+
+    box-shadow:
+        0 18px 45px rgba(0, 119, 255, 0.09);
+}
+
+
+.sector-card:hover::before {
+    transform: scale(1.5);
+
+    opacity: 1;
+}
+
+
+.sector-card:hover .sector-link {
+    gap: 16px;
+}
+
+
+.sector-card:hover .sector-link span {
+    transform: translate(3px, -3px);
+}
+
+
+.sector-card:hover .sector-arrow {
+    color: #ffffff;
+
+    background: var(--brand-blue-light);
+
+    border-color: var(--brand-blue-light);
+
+    transform: rotate(45deg);
+}
+
+
+/* Keyboard accessibility */
+
+.sector-card:focus-visible,
+.works-cta-button:focus-visible {
+    outline: 3px solid var(--brand-blue-light);
+    outline-offset: 5px;
+}
+
+
+/* ========================================
+   CLOSING CTA
+======================================== */
+
+.works-cta {
+    max-width: 800px;
+
+    margin: 100px auto 0;
+
+    padding: 55px 25px;
+
+    text-align: center;
+
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+
+    background: var(--card-bg);
+}
+
+
+.works-cta h2 {
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+
+    font-weight: 800;
+    line-height: 1.25;
+
+    letter-spacing: -1px;
+
+    color: var(--brand-blue);
+}
+
+
+.works-cta p {
+    margin-top: 15px;
+
+    font-size: 1rem;
+    line-height: 1.7;
+
+    color: var(--secondary-text);
+}
+
+
+/* CTA button */
+
+.works-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 28px;
+    padding: 14px 27px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        #091536,
+        #005eff,
+        #00b7ff
+    );
+
+    box-shadow:
+        0 10px 25px rgba(0, 119, 255, 0.2);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.works-cta-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 119, 255, 0.3);
+}
+
+
+/* ========================================
+   DARK MODE
+======================================== */
+
+body.dark-mode .sector-card {
+    background: var(--card-bg);
+
+    border-color: rgba(176, 176, 176, 0.25);
+}
+
+
+body.dark-mode .sector-card:hover {
+    border-color: var(--brand-blue);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.2);
+}
+
+
+body.dark-mode .sector-card::before {
+    background: radial-gradient(
+        circle,
+        rgba(255, 45, 149, 0.12),
+        transparent 70%
+    );
+}
+
+
+body.dark-mode .sector-number,
+body.dark-mode .sector-link {
+    color: var(--brand-blue);
+}
+
+
+body.dark-mode .sector-arrow {
+    background: #101f45;
+
+    border-color: rgba(176, 176, 176, 0.25);
+
+    color: var(--brand-blue);
+}
+
+
+body.dark-mode .sector-card:hover .sector-arrow {
+    color: #091536;
+
+    background: var(--brand-blue);
+
+    border-color: var(--brand-blue);
+}
+
+
+body.dark-mode .works-cta-button {
+    color: #091536;
+
+    background: linear-gradient(
+        135deg,
+        #ff2d95,
+        #ff63b3
+    );
+
+    box-shadow:
+        0 10px 25px rgba(255, 45, 149, 0.15);
+}
+
+
+body.dark-mode .works-cta-button:hover {
+    box-shadow:
+        0 15px 35px rgba(255, 45, 149, 0.25);
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 800px) {
+
+    .works-page {
+        padding: 125px 5vw 60px;
+    }
+
+    .works-hero {
+        margin-bottom: 45px;
+    }
+
+    .works-sectors {
+        gap: 18px;
+    }
+
+    .sector-card {
+        min-height: 330px;
+
+        padding: 25px;
+    }
+
+    .sector-content {
+        margin-top: 35px;
+    }
+
+    .works-cta {
+        margin-top: 75px;
+    }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .works-page {
+        padding: 115px 6vw 45px;
+    }
+
+    .works-hero {
+        margin-bottom: 35px;
+    }
+
+    .works-eyebrow {
+        font-size: 0.7rem;
+
+        letter-spacing: 2px;
+    }
+
+    .works-hero h1 {
+        font-size: clamp(2.3rem, 10vw, 3.5rem);
+
+        letter-spacing: -1.5px;
+    }
+
+    .works-hero p {
+        margin-top: 18px;
+
+        font-size: 0.92rem;
+
+        line-height: 1.8;
+    }
+
+    .works-sectors {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .sector-card {
+        min-height: 300px;
+
+        padding: 24px;
+
+        border-radius: 18px;
+    }
+
+    .sector-content {
+        margin-top: 35px;
+    }
+
+    .sector-content h2 {
+        font-size: 1.65rem;
+    }
+
+    .sector-content p {
+        font-size: 0.9rem;
+    }
+
+    .sector-arrow {
+        top: 20px;
+        right: 20px;
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .works-cta {
+        margin-top: 60px;
+
+        padding: 40px 22px;
+
+        border-radius: 20px;
+    }
+
+    .works-cta h2 {
+        font-size: 1.8rem;
+    }
+
+    .works-cta p {
+        font-size: 0.92rem;
+    }
+
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 350px) {
+
+    .works-page {
+        padding-inline: 5vw;
+    }
+
+    .works-hero h1 {
+        font-size: 2.1rem;
+    }
+
+    .sector-card {
+        padding: 20px;
+    }
+
+    .sector-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .sector-arrow {
+        width: 34px;
+        height: 34px;
+
+        top: 16px;
+        right: 16px;
+    }
+
+}
+/* ========================================
+   CAMPAIGN PAGES
+======================================== */
+
+.campaign-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content */
+
+.campaign-main {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+    padding: 35px 0 90px;
+    flex: 1;
+}
+
+/* Back link */
+
+.back-to-works {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 65px;
+
+    color: var(--secondary-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.back-to-works:hover {
+    color: var(--brand-blue-light);
+    transform: translateX(-4px);
+}
+
+/* Page introduction */
+
+.campaign-header {
+    max-width: 780px;
+    margin-bottom: 65px;
+}
+
+.campaign-eyebrow {
+    margin-bottom: 18px;
+
+    color: var(--brand-blue-light);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.campaign-header h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    font-weight: 750;
+
+    margin-bottom: 22px;
+}
+
+.campaign-accent {
+    color: var(--brand-blue);
+}
+
+.campaign-intro {
+    max-width: 650px;
+
+    color: var(--secondary-text);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Campaign list */
+
+.campaign-list {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Individual campaign rectangle */
+
+.campaign-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 35px;
+
+    padding: 24px;
+
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.campaign-card:hover {
+    border-color: var(--brand-blue-light);
+    transform: translateY(-3px);
+}
+
+/* Video container */
+
+.campaign-media {
+    position: relative;
+    align-self: center;
+
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+}
+
+.campaign-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: auto;
+    object-fit: contain;
+    background: #000;
+}
+/* Campaign information */
+
+.campaign-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    padding: 12px 10px;
+}
+
+.campaign-brand {
+    margin-bottom: 12px;
+
+    color: var(--brand-blue-light);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.campaign-title {
+    margin-bottom: 20px;
+
+    color: var(--text-color);
+    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.campaign-description {
+    margin-bottom: 25px;
+
+    color: var(--secondary-text);
+    font-size: 0.98rem;
+    line-height: 1.8;
+}
+
+/* Idea and approach sections */
+
+.campaign-detail + .campaign-detail {
+    margin-top: 22px;
+}
+
+.campaign-detail h3 {
+    margin-bottom: 9px;
+
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.campaign-detail p {
+    color: var(--secondary-text);
+    font-size: 0.94rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* Loading, empty, and error states */
+
+.campaign-loading,
+.campaign-message {
+    padding: 30px 0;
+
+    color: var(--secondary-text);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.campaign-message {
+    padding: 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+/* Footer positioning */
+
+.campaign-page .footer {
+    margin-top: auto;
+}
+
+/* ========================================
+   RESPONSIVE LAYOUT
+======================================== */
+
+@media (max-width: 850px) {
+    .campaign-main {
+        width: 92%;
+    }
+
+    .campaign-card {
+        gap: 24px;
+        padding: 18px;
+    }
+
+    .campaign-content {
+        padding: 8px 0;
+    }
+
+    .campaign-header {
+        margin-bottom: 45px;
+    }
+
+    .back-to-works {
+        margin-bottom: 45px;
+    }
+}
+
+@media (max-width: 650px) {
+    .campaign-main {
+        width: 92%;
+        padding-top: 24px;
+        padding-bottom: 55px;
+    }
+
+    .back-to-works {
+        margin-bottom: 40px;
+    }
+
+    .campaign-header h1 {
+        letter-spacing: -0.7px;
+    }
+
+    .campaign-intro {
+        font-size: 0.98rem;
+        line-height: 1.75;
+    }
+
+    .campaign-list {
+        gap: 24px;
+    }
+
+    .campaign-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .campaign-media {
+        align-self: auto;
+    }
+
+    .campaign-content {
+        padding: 5px 4px 12px;
+    }
+
+    .campaign-title {
+        font-size: 1.65rem;
+        margin-bottom: 16px;
+    }
+
+    .campaign-description {
+        margin-bottom: 20px;
+    }
+
+    .campaign-detail + .campaign-detail {
+        margin-top: 20px;
+    }
 }

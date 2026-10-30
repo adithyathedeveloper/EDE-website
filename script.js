@@ -62,7 +62,12 @@ themeToggles.forEach(toggle => {
 
     async function loadWorks() {
 
-        try {
+    // The carousel exists only on the main Works page
+    if (!document.querySelector(".works-grid")) return;
+
+    try {
+
+        // Keep your existing carousel code here.
 
             const response = await fetch("./works/info.json");
             const works = await response.json();
@@ -314,9 +319,144 @@ themeToggles.forEach(toggle => {
         }
 
     }
+// ========================================
+// LOAD CAMPAIGN PAGES
+// ========================================
 
+async function loadCampaigns() {
 
-    loadWorks();
+    const campaignPage = document.querySelector(".campaign-page");
+
+    // Only run on campaign pages
+    if (!campaignPage) return;
+
+    const list = document.getElementById("campaign-list");
+    const jsonPath = campaignPage.dataset.worksFile;
+
+    if (!list || !jsonPath) return;
+
+    try {
+
+        const response = await fetch(jsonPath);
+
+        if (!response.ok) {
+            throw new Error(`Failed to load campaign data: ${response.status}`);
+        }
+
+        const campaigns = await response.json();
+
+        list.replaceChildren();
+
+        if (!Array.isArray(campaigns) || campaigns.length === 0) {
+            list.innerHTML = `
+                <p class="campaign-message">
+                    No campaigns have been added to this collection yet.
+                </p>
+            `;
+            return;
+        }
+
+        campaigns.forEach(campaign => {
+
+            const card = document.createElement("article");
+            card.classList.add("campaign-card");
+
+            // Video container
+            const media = document.createElement("div");
+            media.classList.add("campaign-media");
+
+            const video = document.createElement("video");
+            video.classList.add("campaign-video");
+
+            video.controls = true;
+            video.controlsList = "nodownload";
+            video.preload = "metadata";
+            video.playsInline = true;
+            video.muted = true;
+
+            if (campaign.thumbnail) {
+                video.poster = campaign.thumbnail;
+            }
+
+            const source = document.createElement("source");
+            source.src = campaign.video;
+            source.type = "video/mp4";
+
+            video.appendChild(source);
+            media.appendChild(video);
+
+            // Campaign information
+            const content = document.createElement("div");
+            content.classList.add("campaign-content");
+
+            const brand = document.createElement("p");
+            brand.classList.add("campaign-brand");
+            brand.textContent = campaign.brand || "EDE Campaign";
+
+            const title = document.createElement("h2");
+            title.classList.add("campaign-title");
+            title.textContent = campaign.title || "Untitled Campaign";
+
+            content.append(brand, title);
+
+            // Optional campaign description
+            if (campaign.description) {
+
+                const description = document.createElement("p");
+                description.classList.add("campaign-description");
+                description.textContent = campaign.description;
+
+                content.appendChild(description);
+            }
+
+            // Helper to create an idea or approach section
+            function addDetail(heading, text) {
+
+                if (!text) return;
+
+                const detail = document.createElement("div");
+                detail.classList.add("campaign-detail");
+
+                const detailHeading = document.createElement("h3");
+                detailHeading.textContent = heading;
+
+                const detailText = document.createElement("p");
+                detailText.textContent = text;
+
+                detail.append(detailHeading, detailText);
+                content.appendChild(detail);
+            }
+
+            addDetail(
+                campaign.ideaTitle || "The Creative Idea",
+                campaign.idea
+            );
+
+            addDetail(
+                campaign.approachTitle || "Creative Approach",
+                campaign.approach
+            );
+
+            card.append(media, content);
+            list.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error("Unable to load campaigns:", error);
+
+        list.innerHTML = `
+            <p class="campaign-message">
+                We couldn't load these campaigns. Please try again later.
+            </p>
+        `;
+
+    }
+}
+
+   loadCampaigns();
+loadWorks();
 }
 
 main();

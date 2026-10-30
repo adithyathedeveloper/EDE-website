@@ -1,0 +1,19 @@
+[
+    {
+        "brand": "[Independent Concept]",
+        "title": "The Confidence Booster",
+        "thumbnail": "../storytelling/thumbnails/perfumethumb.png",
+        "video": "../storytelling/videos/Perfume.mp4",
+        "approachTitle": "The Creative Idea and Approach",
+        "approach": "This ads intention was to convey how someone who is underconfident and not even ready to get out becomes confident enough to have a wild night with full of energy, because of the perfume. "
+    },
+   
+    {
+        "brand": "[Independent Concept]",
+        "title": "The Magic Ring",
+        "thumbnail": "../storytelling/thumbnails/ringthumb.png",
+        "video": "../storytelling/videos/ring.mp4",
+        "approachTitle": "The Creative Idea and Approach",
+        "approach": "This ad was a creative experiment trying to feed on the emotions of mystery and fantasy."
+    }
+]

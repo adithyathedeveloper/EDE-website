@@ -1,0 +1,38 @@
+[
+    {
+        "brand": "SA CHIKAN ARTS [spec campaign]",
+        "title": "The Flower Among Nature",
+        "thumbnail": "../clothing/thumbnail/SAchikanarts.png",
+        "video": "../clothing/videos/SAchikanartsfinal.mp4",
+        "approachTitle": "The Creative Idea and Approach",
+        "approach": "SA CHIKAN ARTS, this brand had a specific niche of clothing style, they were not selling generic kurtis, but most of their collection followed this Chikankari art style which includes significant threading works, most of them hand embroidered, in this ad, I have tried to resonate the embroidery with nature, to be more particular, flowers."
+    },
+   
+    {
+        "brand": "THE STYLO [spec campaign]",
+        "title": "Everyday, An Occasion",
+        "thumbnail": "../clothing/thumbnail/Thestylo.png",
+        "video": "../clothing/videos/thestylofinal.mp4",
+        "approachTitle": "The Creative Idea and Approach",
+        "approach": "The Stylo, for this brand, I thought of using the element of exaggeration in day to day life, trying to convey that the daily life form is always an occasion when wearing the particular brand's clothing"
+    },
+   
+    {
+        "brand": "KUDDI [spec campaign]",
+        "title": "Wear Your Way Forward",
+        "thumbnail": "../clothing/thumbnail/Kuddi.png",
+        "video": "../clothing/videos/kuddifinal.mp4",
+       "approachTitle": "The Creative Idea and Approach",
+        "approach": "I actually did not spend a lot of time on Kuddi's advertisement, (We design modest, versatile fashion for the Indian woman who’s building her career or her degree, pieces that move easily from a college lecture to an internship interview to coffee with friends.) I saw this piece of text in their website and just replicated it into a visual experience "
+    },
+
+    {
+        "brand": "PEACH MODE [spec campaign]",
+        "title": "Tradition And Modernity Together",
+        "thumbnail": "../clothing/thumbnail/Peachmode.png",
+        "video": "../clothing/videos/peachmodefinal.mp4",
+        "approachTitle": "The Creative Idea and Approach",
+        "approach": "For PeachMode, they too had something interesting in their about section, (Established with a passion for celebrating the beauty of traditions and embracing the allure of modernity) they seemed to promote a style which worked both ways, traditional as well as modern, so the ad works on background transition with different periods of architecture and how well the clothing suits both the places"
+    }
+   
+]
